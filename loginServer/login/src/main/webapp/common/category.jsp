@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-asdfasdf
+
+<h2> login validation 여부 상관 없이 포함되는 page</h2>
 
 </body>
 </html>
