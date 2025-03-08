@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import common.ConnectDB;
 import common.Controller;
 import common.DemoDB;
 import common.Exception;
@@ -20,6 +21,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repository.DemoUser;
+import repository.TestConnectedDB;
 
 
 @WebServlet("/loginAPI/*")
@@ -35,6 +37,7 @@ public class FrontController extends HttpServlet {
 		controllerList.put("/member", new MemberController());
 		controllerList.put("/login", new LoginController());
 		controllerList.put("/", new InitPageController());
+		
 	}
 	
 	@Override
@@ -51,6 +54,9 @@ public class FrontController extends HttpServlet {
 			return;
 		}
 
+		TestConnectedDB db = new TestConnectedDB(getServletContext());
+		db.insertTest();
+		
 		DemoDB test = (DemoDB) req.getServletContext().getAttribute("storage");
 		
 		Map<String, String> getParam = requestToMapParam(req);

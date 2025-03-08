@@ -1,0 +1,23 @@
+
+
+services:
+  login-db:
+    container_name: mydb
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - 15411:3306
+    networks:
+      - my_net
+
+volumes:
+  mysql:
+    name: login
+    external: true
+
+networks:
+  my_net:
+    external: true
