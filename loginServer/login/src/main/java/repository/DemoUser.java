@@ -1,4 +1,4 @@
-package common;
+package repository;
 
 import java.time.LocalDateTime;
 

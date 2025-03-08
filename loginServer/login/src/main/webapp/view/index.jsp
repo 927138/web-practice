@@ -13,13 +13,10 @@
 
 <h2>Home page</h2>
 
-<jsp:include page="/common/category.jsp"/>
-
-
 
 <div>
-	<button onclick="location.href='/member/membership.jsp'">membership</button>
-	<button onclick="location.href='/member/login.jsp'">login</button>
+	<button onclick="location.href='/loginAPI/member'">membership</button>
+	<button onclick="location.href='/loginAPI/login'">login</button>
 </div>
 
 	

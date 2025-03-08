@@ -13,7 +13,7 @@
 	pw : <input type="text" name="userPw"> <br>
 	email : <input type="text" name="userEmail"> <br>
 	
-	<button type="submit">go</button>
+	<button type="submit">create Member</button>
 </form>
 </body>
 </html>
