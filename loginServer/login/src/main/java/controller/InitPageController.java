@@ -7,7 +7,7 @@ import common.Controller;
 public class InitPageController implements Controller {
 	
 	@Override
-	public String get(Map<String, String> getParam, Map<String, Object> setParam) {
+	public String get(Map<String, String> reqParam, Map<String, Object> respParam) {
 		return "/index";
 	}
 

@@ -27,13 +27,26 @@
       <scope>test</scope>
     </dependency>
     
-	    <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+    <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
 	<dependency>
 	    <groupId>com.mysql</groupId>
 	    <artifactId>mysql-connector-j</artifactId>
 	    <version>8.0.33</version>
 	</dependency>
-
+	
+	<!-- JWT -->
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt</artifactId>
+        <version>0.9.1</version>
+    </dependency>
+    
+    <!-- java 17  javax.xml.bind 제거로 jwt에 필요한 의존성 추가 -->
+    <dependency>
+	    <groupId>javax.xml.bind</groupId>
+	    <artifactId>jaxb-api</artifactId>
+    <version>2.3.1</version>
+</dependency>
 
 
   </dependencies>

@@ -1,27 +1,21 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Stream;
 
-import common.ConnectDB;
 import common.Controller;
-import common.DemoDB;
-import common.Exception;
-import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import repository.DemoUser;
-import repository.TestConnectedDB;
+import service.AuthorizationServiceImp;
+import service.AuthoriztionService;
+import service.CookieService;
+import service.CookieServiceImp;
 
 
 @WebServlet("/loginAPI/*")
@@ -34,9 +28,22 @@ public class FrontController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		// Controller DI 
+		
+		AuthoriztionService authorization = new AuthorizationServiceImp();
+		CookieService cookieService = new CookieServiceImp(req, resp);
+		
+		
+		
 		controllerList.put("/member", new MemberController());
-		controllerList.put("/login", new LoginController());
+		controllerList.put("/login", new LoginController(new AuthorizationServiceImp()));
 		controllerList.put("/", new InitPageController());
+		controllerList.put("/jwtTest", new JwtController());
+	}
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
+		super.init(config);
 		
 	}
 	
@@ -54,29 +61,46 @@ public class FrontController extends HttpServlet {
 			return;
 		}
 
-		TestConnectedDB db = new TestConnectedDB(getServletContext());
-		db.insertTest();
+		// db connect test code
+//		TestConnectedDB db = new TestConnectedDB(getServletContext());
+//		db.insertTest();
 		
-		DemoDB test = (DemoDB) req.getServletContext().getAttribute("storage");
+		Map<String, String> reqParam = requestToMapParam(req);
+		Map<String, Object> respParam = new HashMap<>();
 		
-		Map<String, String> getParam = requestToMapParam(req);
-		getParam.put("storage", test.getDemoUser("1").getUserId());
-		Map<String, Object> setParam = new HashMap<>();
+//		Cookie c = new Cookie(uri, uriT);
+//		
+//		Cookie findToken = Arrays.stream(req.getCookies()).filter(str -> str.getName().equals("token")).findFirst().orElseGet(null);
+//		if(Objects.nonNull(findToken)) {
+//			System.out.println("front-controller findToken");
+//			getParam.put("token", findToken.getValue());
+//		}
+		
+		//session param이 존재하면 추가 로직 구현하기
+		
+		
 		String view = null;
 		switch (req.getMethod()) {
 			case "GET" : 
-				view = controller.get(getParam, setParam);
+				view = controller.get(reqParam, respParam);
 				break;
 			case "POST" :
-				view = controller.post(getParam, setParam);
+				view = controller.post(reqParam, respParam);
 				break;
 			case "PUT" :
 				break;
 			case "DELETE" :
 				break;
 			default:
-				throw new Exception(500, "??");
+				throw new common.Exception(500, "??");
 		}
+		
+//		if(setParam.containsKey("cookie")) {
+//			System.out.println("cookie call");
+//			resp.addCookie(new Cookie("token", (String) setParam.get("token")));
+//		}
+//		
+		
 		
 		
 		req.getRequestDispatcher(viewMapping(view)).forward(req, resp);
