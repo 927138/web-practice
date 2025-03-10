@@ -36,7 +36,7 @@ public class FrontController extends HttpServlet {
 			resp.sendError(404);
 			return;
 		}
-		// controller dynamic injection
+		// controller dynamic inject
 		controller = new ControllerDynamicFactory(req, resp).createObjectController(controller);
 		
 		Map<String, String> reqParam = requestToMapParam(req);
