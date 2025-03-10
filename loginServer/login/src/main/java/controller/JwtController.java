@@ -3,8 +3,6 @@ package controller;
 import java.util.Map;
 import java.util.Objects;
 
-import common.Controller;
-import service.AuthoriztionService;
 import utils.JwtManager;
 
 public class JwtController implements Controller {

@@ -2,7 +2,6 @@ package controller;
 
 import java.util.Map;
 
-import common.Controller;
 import service.AuthoriztionService;
 import service.CookieService;
 
@@ -11,10 +10,10 @@ public class LoginController implements Controller {
 	private final AuthoriztionService authService;
 	private final CookieService cookieService;
 	
-	public LoginController(AuthoriztionService authService) {
-		this(authService, null);
+	public LoginController() {
+		this(null, null);
 	}
-	
+		
 	public LoginController(AuthoriztionService authService, CookieService cookieService) {
 		this.authService = authService;
 		this.cookieService = cookieService;
@@ -32,9 +31,8 @@ public class LoginController implements Controller {
 		String id = reqParam.get("userId");
 		String pw = reqParam.get("userPw");
 		
-		if(reqParam.get("storage").equals(id)) {
-			System.out.println("good");
-		}
+		cookieService.setCookie(id, "", 100);
+		cookieService.setCookie(pw, "", 100);
 		
 		return "/index";
 	}

@@ -1,4 +1,5 @@
-package common;
+package repository;
+
 
 public interface Repository {
 

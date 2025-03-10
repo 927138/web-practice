@@ -1,4 +1,5 @@
-package common;
+package exception;
+
 
 public class Exception extends RuntimeException {
 

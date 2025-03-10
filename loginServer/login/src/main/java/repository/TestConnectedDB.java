@@ -1,6 +1,5 @@
 package repository;
 
-import common.ConnectDB;
 import jakarta.servlet.ServletContext;
 
 public class TestConnectedDB extends ConnectDB {

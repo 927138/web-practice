@@ -2,8 +2,6 @@ package controller;
 
 import java.util.Map;
 
-import common.Controller;
-
 public class InitPageController implements Controller {
 	
 	@Override
