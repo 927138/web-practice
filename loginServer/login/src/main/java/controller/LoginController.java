@@ -34,7 +34,7 @@ public class LoginController implements Controller {
 		if(!Objects.isNull(cookieData)) {
 			System.out.println("cookie exist");
 			authService.deleteAuth(id);
-			return "/index";
+			return "redirect:/index";
 		}
 		
 		

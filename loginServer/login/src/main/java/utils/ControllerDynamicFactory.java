@@ -23,8 +23,6 @@ public class ControllerDynamicFactory {
 		
 		if(controller instanceof LoginController) {
 			AuthoriztionService authorService = new AuthoriztionServiceCookie(request, response);
-			System.out.println("log : dynamic controller select Login");
-			
 			return new LoginController(authorService);
 		}
 		

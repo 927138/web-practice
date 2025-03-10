@@ -30,22 +30,14 @@ public class FrontController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
-//		String uriT = headUri(uri);
-		
-
 		Controller controller = staticFactory.getController(uri.replace(PREFIX, ""));
 		
 		if(Objects.isNull(controller)) {
 			resp.sendError(404);
 			return;
 		}
+		// controller dynamic injection
 		controller = new ControllerDynamicFactory(req, resp).createObjectController(controller);
-		
-
-		// db connect test code
-//		TestConnectedDB db = new TestConnectedDB(getServletContext());
-//		db.insertTest();
-		
 		
 		Map<String, String> reqParam = requestToMapParam(req);
 		Map<String, Object> respParam = new HashMap<>();
@@ -66,7 +58,11 @@ public class FrontController extends HttpServlet {
 				throw new exception.Exception(500, "??");
 		}
 		
-		
+		if(view.startsWith(REDIRECT)) {
+			String redirectView = viewMapping(view.substring(REDIRECT.length()));
+			resp.sendRedirect(redirectView);
+			return;
+		}
 		
 		req.getRequestDispatcher(viewMapping(view)).forward(req, resp);
 		
@@ -79,11 +75,9 @@ public class FrontController extends HttpServlet {
 
 	
 	private Map<String, String> requestToMapParam(HttpServletRequest req){
-		
 		Map<String, String> params = new HashMap<>();
 		req.getParameterNames().asIterator()
 								.forEachRemaining(name -> params.put(name, req.getParameter(name)));
-		
 		return params;
 	}
 	
