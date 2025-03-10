@@ -5,6 +5,7 @@ import controller.LoginController;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service.AuthoriztionService;
+import service.AuthoriztionServiceCookie;
 import service.CookieService;
 import service.CookieServiceImp;
 
@@ -18,11 +19,16 @@ public class ControllerDynamicFactory {
 		this.response = response;
 	}
 	
-	public Controller createLoginController() {
-		AuthoriztionService authorService = null;
-		CookieService cookieService = new CookieServiceImp(request, response);
+	public Controller createObjectController(Controller controller) {
 		
-		return new LoginController(authorService, cookieService);
+		if(controller instanceof LoginController) {
+			AuthoriztionService authorService = new AuthoriztionServiceCookie(request, response);
+			System.out.println("log : dynamic controller select Login");
+			
+			return new LoginController(authorService);
+		}
+		
+		return controller;
 	}
 	
 	// TODO

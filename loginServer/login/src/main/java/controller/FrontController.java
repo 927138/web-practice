@@ -39,16 +39,13 @@ public class FrontController extends HttpServlet {
 			resp.sendError(404);
 			return;
 		}
+		controller = new ControllerDynamicFactory(req, resp).createObjectController(controller);
 		
 
 		// db connect test code
 //		TestConnectedDB db = new TestConnectedDB(getServletContext());
 //		db.insertTest();
 		
-		
-		if(controller instanceof LoginController) {
-			controller = new ControllerDynamicFactory(req, resp).createLoginController();
-		}
 		
 		Map<String, String> reqParam = requestToMapParam(req);
 		Map<String, Object> respParam = new HashMap<>();
@@ -79,15 +76,7 @@ public class FrontController extends HttpServlet {
 		return "/view"+viewPath+".jsp";
 	}
 	
-//	private String headUri(String uri) {
-//		
-//		String processedUri  = uri.replace(PREFIX, "");
-//		
-//		return controllerList.keySet().stream()
-//		        .filter(temp -> temp.equals(processedUri))
-//		        .findFirst()
-//		        .orElse("/");
-//	}
+
 	
 	private Map<String, String> requestToMapParam(HttpServletRequest req){
 		

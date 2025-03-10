@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.Map;
+import java.util.Objects;
 
 import service.AuthoriztionService;
 import service.CookieService;
@@ -8,15 +9,13 @@ import service.CookieService;
 public class LoginController implements Controller {
 	
 	private final AuthoriztionService authService;
-	private final CookieService cookieService;
 	
 	public LoginController() {
-		this(null, null);
+		this(null);
 	}
 		
-	public LoginController(AuthoriztionService authService, CookieService cookieService) {
+	public LoginController(AuthoriztionService authService) {
 		this.authService = authService;
-		this.cookieService = cookieService;
 	}
 	
 	
@@ -31,8 +30,16 @@ public class LoginController implements Controller {
 		String id = reqParam.get("userId");
 		String pw = reqParam.get("userPw");
 		
-		cookieService.setCookie(id, "", 100);
-		cookieService.setCookie(pw, "", 100);
+		String cookieData = authService.getdAuth(id, id);
+		if(!Objects.isNull(cookieData)) {
+			System.out.println("cookie exist");
+			authService.deleteAuth(id);
+			return "/index";
+		}
+		
+		
+		authService.createAuth(id, pw);
+		System.out.println("cookie existsdfsdfsdf");
 		
 		return "/index";
 	}
