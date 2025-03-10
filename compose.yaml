@@ -2,7 +2,7 @@
 
 services:
   login-db:
-    container_name: mydb
+    container_name: memberDB
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: 1234
@@ -13,10 +13,21 @@ services:
     networks:
       - my_net
 
+  session-db:
+    container_name: authDB
+    image: redis
+    volumes:
+      - redis:/data
+    ports:
+      - 15412:6379
+    networks:
+      - my_net
+    
 volumes:
   mysql:
-    name: login
-    external: true
+    name: memberDB
+  redis:
+    name: authDB
 
 networks:
   my_net:
