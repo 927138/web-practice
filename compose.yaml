@@ -26,8 +26,10 @@ services:
 volumes:
   mysql:
     name: memberDB
+    external: true
   redis:
     name: authDB
+    external: true
 
 networks:
   my_net:
