@@ -19,8 +19,8 @@
 	<button onclick="location.href='/loginAPI/login'">login</button>
 </div>
 
-	
-	
+<p>user input : ${ input }</p>
+<h2>${ input }</h2>
 
 </body>
 </html>

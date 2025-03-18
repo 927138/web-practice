@@ -36,6 +36,7 @@ public class FrontController extends HttpServlet {
 			resp.sendError(404);
 			return;
 		}
+		
 		// controller dynamic inject
 		controller = new ControllerDynamicFactory(req, resp).createObjectController(controller);
 		
@@ -58,12 +59,17 @@ public class FrontController extends HttpServlet {
 				throw new exception.Exception(500, "??");
 		}
 		
+		// test header
+		resp.setHeader("test", view);
+		System.out.println(resp.getHeader("test"));
+		
 		if(view.startsWith(REDIRECT)) {
 			String redirectView = viewMapping(view.substring(REDIRECT.length()));
 			resp.sendRedirect(redirectView);
 			return;
 		}
 		
+		System.out.println(req.getAttribute("test"));
 		req.getRequestDispatcher(viewMapping(view)).forward(req, resp);
 		
 	}

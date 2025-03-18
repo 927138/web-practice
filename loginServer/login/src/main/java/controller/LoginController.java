@@ -26,20 +26,23 @@ public class LoginController implements Controller {
 	
 	@Override
 	public String post(Map<String, String> reqParam, Map<String, Object> respParam) {
+//		
+//		String id = reqParam.get("userId");
+//		String pw = reqParam.get("userPw");
+//		
+//		String cookieData = authService.getdAuth(id, id);
+//		if(!Objects.isNull(cookieData)) {
+//			System.out.println("cookie exist");
+//			authService.deleteAuth(id);
+//			return "redirect:/index";
+//		}
+//		
+//		
+//		authService.createAuth(id, pw);
+//		System.out.println("cookie existsdfsdfsdf");
 		
-		String id = reqParam.get("userId");
-		String pw = reqParam.get("userPw");
 		
-		String cookieData = authService.getdAuth(id, id);
-		if(!Objects.isNull(cookieData)) {
-			System.out.println("cookie exist");
-			authService.deleteAuth(id);
-			return "redirect:/index";
-		}
-		
-		
-		authService.createAuth(id, pw);
-		System.out.println("cookie existsdfsdfsdf");
+		reqParam.put("test", "test");
 		
 		return "/index";
 	}
