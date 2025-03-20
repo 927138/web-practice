@@ -5,7 +5,6 @@ import java.util.Map;
 
 import controller.Controller;
 import controller.InitPageController;
-import controller.JwtController;
 import controller.LoginController;
 import controller.MemberController;
 
@@ -17,7 +16,6 @@ public class ControllerStaticFactory {
 		controllers.put("/member", new MemberController());
 		controllers.put("/login", new LoginController());
 		controllers.put("/", new InitPageController());
-		controllers.put("/jwtTest", new JwtController());
 	}
 	
 	public Controller getController(String path) {

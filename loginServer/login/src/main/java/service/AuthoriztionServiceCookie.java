@@ -33,7 +33,7 @@ public class AuthoriztionServiceCookie implements AuthoriztionService {
 	@Override
 	public String getdAuth(String validVariable, String id) {
 		return Arrays.stream(req.getCookies())
-				.filter(cookie -> cookie.getName().equals("t"))
+				.filter(cookie -> cookie.getName().equals("t")) // 임시 변수
 				.map(Cookie::getName)
 				.findAny()
 				.orElse(null);

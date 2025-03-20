@@ -39,7 +39,7 @@ public class FrontController extends HttpServlet {
 		// controller dynamic inject
 		controller = new ControllerDynamicFactory(req, resp).createObjectController(controller);
 		
-		Map<String, String> reqParam = requestToMapParam(req);
+		Map<String, String> reqParam = requestObjectToreqParam(req);
 		Map<String, Object> respParam = new HashMap<>();
 		
 		String view = null;
@@ -74,13 +74,11 @@ public class FrontController extends HttpServlet {
 	
 
 	
-	private Map<String, String> requestToMapParam(HttpServletRequest req){
+	private Map<String, String> requestObjectToreqParam(HttpServletRequest req){
 		Map<String, String> params = new HashMap<>();
 		req.getParameterNames().asIterator()
 								.forEachRemaining(name -> params.put(name, req.getParameter(name)));
 		return params;
 	}
-	
-	
-	
+		
 }
