@@ -39,7 +39,6 @@ public class LoginController implements Controller {
 		
 		
 		authService.createAuth(id, pw);
-		System.out.println("cookie existsdfsdfsdf");
 		
 		return "/index";
 	}

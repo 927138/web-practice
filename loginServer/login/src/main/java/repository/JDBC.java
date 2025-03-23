@@ -9,14 +9,14 @@ import java.sql.Statement;
 
 import jakarta.servlet.ServletContext;
 
-public class JDBCConnect {
+public class JDBC {
 	
 	public Connection conn;
 	public Statement stmt;
 	public PreparedStatement pstmt;
 	public ResultSet rs;
 	
-	public JDBCConnect (ServletContext application) {
+	public JDBC (ServletContext application) {
 		
 		try {
 			String driver = application.getInitParameter("MysqlDriver");

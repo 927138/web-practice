@@ -6,16 +6,16 @@ import java.util.Map;
 public interface Controller {
 	
 	default String get(Map<String, String> reqParam, Map<String, Object> respParam) {
-		throw new UnsupportedOperationException("get method support controller");
+		throw new UnsupportedOperationException("Controller does not support methods Get");
 	}
 	default String post(Map<String, String> reqParam, Map<String, Object> respParam) {
-		throw new UnsupportedOperationException("post method support controller");
+		throw new UnsupportedOperationException("Controller does not support methods Post");
 	}
 	default String put(Map<String, String> reqParam, Map<String, Object> respParam) {
-		throw new UnsupportedOperationException("put method support controller");
+		throw new UnsupportedOperationException("Controller does not support methods Put");
 	}
 	default String delete(Map<String, String> reqParam, Map<String, Object> respParam) {
-		throw new UnsupportedOperationException("delete method support controller");
+		throw new UnsupportedOperationException("Controller does not support methods Delete");
 	}
 	
 }
