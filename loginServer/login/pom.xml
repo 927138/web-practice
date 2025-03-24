@@ -15,8 +15,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
   <dependencies>
@@ -33,20 +33,6 @@
 	    <artifactId>mysql-connector-j</artifactId>
 	    <version>8.0.33</version>
 	</dependency>
-	
-	<!-- JWT -->
-    <dependency>
-        <groupId>io.jsonwebtoken</groupId>
-        <artifactId>jjwt</artifactId>
-        <version>0.9.1</version>
-    </dependency>
-    
-    <!-- java 17  javax.xml.bind 제거로 jwt에 필요한 의존성 추가 -->
-    <dependency>
-	    <groupId>javax.xml.bind</groupId>
-	    <artifactId>jaxb-api</artifactId>
-    <version>2.3.1</version>
-</dependency>
 
 	<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
 	<dependency>
@@ -54,6 +40,24 @@
 	    <artifactId>jedis</artifactId>
 	    <version>2.9.0</version>
 	</dependency>
+
+<!-- 서블릿 API 정의 -->
+	<dependency>
+	    <groupId>jakarta.servlet.jsp.jstl</groupId>
+	    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+	    <version>3.0.1</version>
+	    <exclusions>
+	        <exclusion>
+	            <groupId>jakarta.servlet</groupId>
+	            <artifactId>jakarta.servlet-api</artifactId>
+	        </exclusion>
+	    </exclusions>
+	</dependency>
+    <dependency>
+        <groupId>org.glassfish.web</groupId>
+        <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+        <version>3.0.1</version>
+    </dependency>
 
 
 

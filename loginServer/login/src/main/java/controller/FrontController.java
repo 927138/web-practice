@@ -36,7 +36,7 @@ public class FrontController extends HttpServlet {
 			return;
 		}
 		
-		Map<String, String> reqParam = requestObjectToreqParam(req);
+		Map<String, Object> reqParam = requestToreqParam(req);
 		Map<String, Object> respParam = new HashMap<>();
 		
 		String view = null;
@@ -48,12 +48,16 @@ public class FrontController extends HttpServlet {
 				view = controller.post(reqParam, respParam);
 				break;
 			case "PUT" :
+				view = controller.put(reqParam, respParam);
 				break;
 			case "DELETE" :
+				view = controller.delete(reqParam, respParam);
 				break;
 			default:
 				throw new exception.Exception(500, "??");
 		}
+		
+		reqParamToRequset(req, reqParam);
 		
 		if(view.startsWith(REDIRECT)) {
 			String redirectView = viewMapping(view.substring(REDIRECT.length()));
@@ -69,10 +73,17 @@ public class FrontController extends HttpServlet {
 		return "/view"+viewPath+".jsp";
 	}
 	
-
+	private void reqParamToRequset(HttpServletRequest req, Map<String, Object> reqParam) {
+		reqParam.entrySet().forEach(
+				param -> {
+					req.setAttribute(param.getKey(), param.getValue());
+				}
+			);
+		req.setAttribute(PREFIX, reqParam);
+	}
 	
-	private Map<String, String> requestObjectToreqParam(HttpServletRequest req){
-		Map<String, String> params = new HashMap<>();
+	private Map<String, Object> requestToreqParam(HttpServletRequest req){
+		Map<String, Object> params = new HashMap<>();
 		req.getParameterNames().asIterator()
 								.forEachRemaining(name -> params.put(name, req.getParameter(name)));
 		return params;
