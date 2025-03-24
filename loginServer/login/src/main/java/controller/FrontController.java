@@ -10,7 +10,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import utils.ControllerDynamicFactory;
 import utils.ControllerStaticFactory;
 
 
@@ -36,8 +35,6 @@ public class FrontController extends HttpServlet {
 			resp.sendError(404);
 			return;
 		}
-		// controller dynamic inject
-		controller = new ControllerDynamicFactory(req, resp).createObjectController(controller);
 		
 		Map<String, String> reqParam = requestObjectToreqParam(req);
 		Map<String, Object> respParam = new HashMap<>();
