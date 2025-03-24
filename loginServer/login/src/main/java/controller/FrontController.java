@@ -5,12 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import utils.ControllerStaticFactory;
+import utils.DependencyFactory;
 
 
 @WebServlet("/loginAPI/*")
@@ -18,18 +19,17 @@ public class FrontController extends HttpServlet {
 	
 	private final String REDIRECT = "redirect:";
 	private final String PREFIX = "/loginAPI";
-	private ControllerStaticFactory staticFactory;
+	private DependencyFactory dependencyFactory;
 	
 	@Override
-	public void init() throws ServletException {
-		// Controller DI 
-		this.staticFactory = new ControllerStaticFactory();
+	public void init(ServletConfig config) throws ServletException {
+		this.dependencyFactory = new DependencyFactory(config.getServletContext());
 	}
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
-		Controller controller = staticFactory.getController(uri.replace(PREFIX, ""));
+		Controller controller =  (Controller) dependencyFactory.getController(uri.replace(PREFIX, ""));
 		
 		if(Objects.isNull(controller)) {
 			resp.sendError(404);
