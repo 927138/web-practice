@@ -39,7 +39,7 @@
 </head>
 <body>
     <h2 style="text-align: center;">데이터 입력 폼</h2>
-    <form action="insertData.jsp" method="post">
+    <form action="/loginAPI/write" method="post">
         <label for="name">이름:</label>
         <input type="text" id="name" name="name" required>
 

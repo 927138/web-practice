@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import DTO.PostDTO;
+import model.CreatePostRequest;
+import model.PostRequest;
 import utils.MysqlConfigration;
 
 public class PostRepository{
@@ -15,8 +16,8 @@ public class PostRepository{
 		this.jdbc = jdbc;
 	}
 	
-	public List<PostDTO> selectListPage(){
-		List<PostDTO> pageList = new ArrayList<>();
+	public List<PostRequest> selectListPage(){
+		List<PostRequest> pageList = new ArrayList<>();
 		
 		String query = "SELECT * FROM posts ORDER BY idx DESC";
 		
@@ -25,7 +26,7 @@ public class PostRepository{
 			jdbc.rs = jdbc.pstmt.executeQuery();
 						
 			while (jdbc.rs.next()) {
-				PostDTO post = PostDTO.builder()
+				PostRequest post = PostRequest.builder()
 					    .idx(jdbc.rs.getInt(1))
 					    .name(jdbc.rs.getString(2))
 					    .title(jdbc.rs.getString(3))
@@ -42,7 +43,7 @@ public class PostRepository{
 		return pageList;
 	}
 	
-	public int writeBoard(PostDTO dto) {
+	public int writeBoard(CreatePostRequest post) {
 		int result = 0;
 		
 		String query = ""
@@ -51,9 +52,9 @@ public class PostRepository{
 		
 		try {
 			jdbc.pstmt = jdbc.conn.prepareStatement(query);
-			jdbc.pstmt.setString(1, dto.getName());
-			jdbc.pstmt.setString(2, dto.getTitle());
-			jdbc.pstmt.setString(3, dto.getContent());
+			jdbc.pstmt.setString(1, post.getName());
+			jdbc.pstmt.setString(2, post.getTitle());
+			jdbc.pstmt.setString(3, post.getContent());
 			
 			result = jdbc.pstmt.executeUpdate();
 		} catch (Exception e) {

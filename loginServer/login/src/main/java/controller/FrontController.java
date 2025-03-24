@@ -60,8 +60,8 @@ public class FrontController extends HttpServlet {
 		reqParamToRequset(req, reqParam);
 		
 		if(view.startsWith(REDIRECT)) {
-			String redirectView = viewMapping(view.substring(REDIRECT.length()));
-			resp.sendRedirect(redirectView);
+			String redirectLink = view.substring(REDIRECT.length());
+			resp.sendRedirect(redirectLink);
 			return;
 		}
 		

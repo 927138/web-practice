@@ -2,7 +2,8 @@ package service;
 
 import java.util.List;
 
-import DTO.PostDTO;
+import model.CreatePostRequest;
+import model.PostRequest;
 import repository.PostRepository;
 
 public class PostServiceImp implements PostService{
@@ -13,13 +14,13 @@ public class PostServiceImp implements PostService{
 	}
 	
 	@Override
-	public List<PostDTO> getPostList() {
-		List<PostDTO> postList = postRepository.selectListPage();
+	public List<PostRequest> getPostList() {
+		List<PostRequest> postList = postRepository.selectListPage();
 		return postList;
 	}
 	
 	@Override
-	public void writePost(PostDTO post) {
+	public void writePost(CreatePostRequest post) {
 		postRepository.writeBoard(post);
 	}
 }

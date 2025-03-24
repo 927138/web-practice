@@ -35,7 +35,7 @@
 <body>
     <h2>Home Page</h2>
     <div>
-        <button onclick="location.href='/loginAPI/post'">Post</button>
+        <button onclick="location.href='/loginAPI/posts'">Post</button>
     </div>
 </body>
 

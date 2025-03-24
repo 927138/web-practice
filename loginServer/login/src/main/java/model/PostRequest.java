@@ -1,17 +1,17 @@
-package DTO;
+package model;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
-public class PostDTO {
-	private int idx;
-	private String name;
-	private String title;
-	private String content;
-	private LocalDateTime postDate;
-	private int visitCount;
+public class PostRequest {
+	private final int idx;
+	private final String name;
+	private final String title;
+	private final String content;
+	private final LocalDateTime postDate;
+	private final int visitCount;
 	
-	private PostDTO(Builder builder) {
+	private PostRequest(Builder builder) {
 		this.idx = builder.idx;
 		this.name = builder.name;
 		this.title = builder.title;
@@ -38,8 +38,8 @@ public class PostDTO {
         public Builder postdate(LocalDateTime postDate) { this.postDate = postDate; return this; }
         public Builder visitcount(int visitCount) { this.visitCount = visitCount; return this; }
         
-        public PostDTO build() {
-        	return new PostDTO(this);
+        public PostRequest build() {
+        	return new PostRequest(this);
         }
 	}
 	

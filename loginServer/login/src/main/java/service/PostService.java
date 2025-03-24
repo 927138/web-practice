@@ -2,9 +2,10 @@ package service;
 
 import java.util.List;
 
-import DTO.PostDTO;
+import model.CreatePostRequest;
+import model.PostRequest;
 
 public interface PostService {
-	List<PostDTO> getPostList();
-	void writePost(PostDTO post);
+	List<PostRequest> getPostList();
+	void writePost(CreatePostRequest post);
 }

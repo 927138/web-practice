@@ -5,6 +5,7 @@ import java.util.Map;
 
 import controller.InitPageController;
 import controller.PostController;
+import controller.PostsController;
 import jakarta.servlet.ServletContext;
 import repository.PostRepository;
 import service.PostService;
@@ -41,7 +42,9 @@ public class DependencyFactory {
 	
 	private void injectionController() {
 		this.objectContainer.put("/", new InitPageController());
-		this.objectContainer.put("/post", 
+		this.objectContainer.put("/posts", 
+				new PostsController((PostService) objectContainer.get("PostService")));
+		this.objectContainer.put("/write", 
 				new PostController((PostService) objectContainer.get("PostService")));
 	}
 }
