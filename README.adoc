@@ -4,4 +4,4 @@ Test
 == FrontController
 - FrontController에서 모든 Servlet 객체를 관리하여 Controller 객체 의존성 관리, 주입, 제어 구현
 - 참고 문서 : Spring DispatherServlet, 디자인 패턴
-- link:https://github.com/927138/web-practice/tree/feature/frontController[move(feature/frontController)]
+- link:https://github.com/927138/web-practice/tree/frontController[frontController]
